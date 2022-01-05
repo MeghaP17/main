@@ -12,10 +12,10 @@ git config --global user.name "$GIT_USERNAME"
 git config --global user.email "$GIT_EMAIL"
 
 
-RESOURCE_GROUP=$(az group list --query "[0].name" -o tsv)
+RESOURCE_GROUP="azsu-rg-devtest-emt-integration-001"
 
 # Create App Service plan
-PLAN_NAME=myPlan
+PLAN_NAME="ASP-azsurgdevtestemtintegration001-afa4 (S1: 1)"
 
 
 printf "\nCreating App Service plan in FREE tier ... (2/7)\n\n"
@@ -31,8 +31,8 @@ az webapp create --name $apiappname --resource-group $RESOURCE_GROUP --plan $api
 printf "\nSetting the account-level deployment credentials ...(4/7)\n\n"
 
 
-DEPLOY_USER="myName1$(openssl rand -hex 5)"
-DEPLOY_PASSWORD="Pw1$(openssl rand -hex 10)"
+DEPLOY_USER="MeghaP17"
+DEPLOY_PASSWORD="Megh@p@tel17c"
 
 az webapp deployment user set --user-name $DEPLOY_USER --password $DEPLOY_PASSWORD --verbose
 
@@ -41,7 +41,7 @@ GIT_URL="https://$DEPLOY_USER@$apiappname.scm.azurewebsites.net/$apiappname.git"
 
 # Create Web App with local-git deploy
 
-REMOTE_NAME=dev
+REMOTE_NAME=development
 
 
 # Set remote on src
@@ -71,7 +71,7 @@ printf "***********************    IMPORTANT INFO  *********************\n\n"
 
 printf "%s %s %s\n\n" "Password for " "$GIT_URL:" "$DEPLOY_PASSWORD"
 
-printf "Example URL: https://$apiappname.azurewebsites.net/api/values/6/7\n\n"
+printf "Example URL: https://$apiappname.azurewebsites.net/weatherforecast\n\n"
 
 printf "Swagger URL: https://$apiappname.azurewebsites.net/swagger\n"
 
